@@ -1,15 +1,15 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QApplication
-from PyQt5 import uic
+from ui import Ui_Form
 from PyQt5.QtGui import QPainter, QColor
 from random import randint
 
 
-class WhatWindow(QWidget):
+class WhatWindow(QWidget, Ui_Form):
     def __init__(self):
         super().__init__()
         self.XXX = False
-        uic.loadUi('Ui.ui', self)
+        self.setupUi(self)
         self.spawnbtn.clicked.connect(self.spawn)
 
     def spawn(self):
@@ -20,9 +20,10 @@ class WhatWindow(QWidget):
         if self.XXX:
             qp = QPainter()
             qp.begin(self)
-            qp.setBrush(QColor(255, 255, 0))
+            qp.setBrush(QColor(randint(0, 256), randint(0, 256), randint(0, 256)))
             razm = randint(10, 200)
-            qp.drawEllipse(randint(0, self.width() - razm), randint(0, self.height() - razm), razm, razm)
+            qp.drawEllipse(randint(0, self.width() - razm), randint(0, self.height() - razm),
+                           razm, razm)
             qp.end()
 
 
